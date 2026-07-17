@@ -1,0 +1,191 @@
+erDiagram
+    USER ||--o| OWNER_PROFILE : "has (if role=owner)"
+    USER ||--o| WALLET : owns
+    USER ||--o{ LISTING : owns
+    USER ||--o{ BOOKING : "places (as customer)"
+    USER ||--o{ REVIEW : writes
+    USER ||--o{ NOTIFICATION : receives
+    USER ||--o{ REFRESH_TOKEN : has
+    USER ||--o{ AUDIT_LOG : "performs (as admin)"
+    USER }o--o{ LISTING : favorites
+
+    OWNER_PROFILE ||--o{ BANK_ACCOUNT : has
+    OWNER_PROFILE ||--o{ WITHDRAWAL : requests
+
+    LISTING ||--o{ LISTING_IMAGE : has
+    LISTING ||--o{ BOOKING : "is booked in"
+    LISTING ||--o{ REVIEW : receives
+
+    BOOKING ||--o| PAYMENT : "is paid via"
+    BOOKING ||--o| SHIPMENT : "tracked by"
+    BOOKING ||--o| REVIEW : "reviewed by"
+
+    WALLET ||--o{ WALLET_TRANSACTION : records
+    WALLET ||--o{ WITHDRAWAL : funds
+
+    BANK_ACCOUNT ||--o{ WITHDRAWAL : "paid out to"
+
+    USER {
+        objectId _id PK
+        string name
+        string email UK
+        string phone UK
+        string password_hash
+        string google_id
+        string avatar_url
+        enum role "customer | owner | admin"
+        boolean is_verified
+        boolean is_active
+        boolean two_factor_enabled
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    OWNER_PROFILE {
+        objectId _id PK
+        objectId user_id FK
+        string business_name
+        enum service_type "warehouse | cold_storage | logistics | transport"
+        boolean is_verified_owner
+        timestamp created_at
+    }
+
+    LISTING {
+        objectId _id PK
+        objectId owner_id FK
+        enum type "warehouse | cold_storage | logistics | transport"
+        string brand_name
+        string description
+        string address
+        decimal gps_lat
+        decimal gps_lng
+        decimal daily_price
+        int capacity
+        string vehicle_type
+        boolean is_available
+        boolean is_paused
+        boolean is_deleted
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    LISTING_IMAGE {
+        objectId _id PK
+        objectId listing_id FK
+        string url
+        int sort_order
+    }
+
+    BOOKING {
+        objectId _id PK
+        objectId customer_id FK
+        objectId listing_id FK
+        enum status "pending | awaiting_payment | paid | active | completed | cancelled"
+        decimal quantity
+        date start_date
+        date end_date
+        decimal total_price
+        string cancellation_reason
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PAYMENT {
+        objectId _id PK
+        objectId booking_id FK
+        string provider
+        string reference UK
+        decimal amount
+        enum status "initialized | success | failed"
+        timestamp verified_at
+        timestamp created_at
+    }
+
+    WALLET {
+        objectId _id PK
+        objectId owner_id FK
+        decimal pending_balance
+        decimal available_balance
+        timestamp updated_at
+    }
+
+    WALLET_TRANSACTION {
+        objectId _id PK
+        objectId wallet_id FK
+        objectId related_booking_id FK
+        enum type "credit | debit | commission"
+        decimal amount
+        string description
+        timestamp created_at
+    }
+
+    BANK_ACCOUNT {
+        objectId _id PK
+        objectId owner_id FK
+        string bank_name
+        string account_number
+        string account_name
+        boolean is_validated
+        timestamp created_at
+    }
+
+    WITHDRAWAL {
+        objectId _id PK
+        objectId owner_id FK
+        objectId wallet_id FK
+        objectId bank_account_id FK
+        decimal amount
+        enum status "pending | approved | rejected | paid"
+        timestamp requested_at
+        timestamp processed_at
+    }
+
+    REVIEW {
+        objectId _id PK
+        objectId booking_id FK
+        objectId customer_id FK
+        objectId listing_id FK
+        int rating
+        string comment
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    SHIPMENT {
+        objectId _id PK
+        objectId booking_id FK
+        enum status "pending | picked_up | in_transit | arriving | delivered"
+        decimal current_lat
+        decimal current_lng
+        string driver_name
+        string driver_phone
+        timestamp updated_at
+    }
+
+    NOTIFICATION {
+        objectId _id PK
+        objectId user_id FK
+        enum type "booking | payment | withdrawal | system"
+        string message
+        boolean is_read
+        timestamp created_at
+    }
+
+    REFRESH_TOKEN {
+        objectId _id PK
+        objectId user_id FK
+        string token_hash
+        boolean revoked
+        timestamp expires_at
+        timestamp created_at
+    }
+
+    AUDIT_LOG {
+        objectId _id PK
+        objectId admin_id FK
+        string action
+        string target_type
+        objectId target_id
+        json metadata
+        timestamp created_at
+    }

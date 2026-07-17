@@ -1,0 +1,113 @@
+{
+  "info": {
+    "name": "TomaLink API",
+    "description": "Planned API contract for the TomaLink backend. Endpoints are stubbed ahead of implementation so the frontend can build against a stable contract early. Update sample responses as each module is built.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api/v1" },
+    { "key": "accessToken", "value": "" },
+    { "key": "refreshToken", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        { "name": "Health Check", "request": { "method": "GET", "url": "{{baseUrl}}/../health" } }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        { "name": "Register", "request": { "method": "POST", "url": "{{baseUrl}}/auth/register", "body": { "mode": "raw", "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"role\": \"customer\"\n}" } } },
+        { "name": "Login", "request": { "method": "POST", "url": "{{baseUrl}}/auth/login", "body": { "mode": "raw", "raw": "{\n  \"email\": \"\",\n  \"password\": \"\"\n}" } } },
+        { "name": "Google OAuth", "request": { "method": "GET", "url": "{{baseUrl}}/auth/google" } },
+        { "name": "Refresh Token", "request": { "method": "POST", "url": "{{baseUrl}}/auth/refresh-token" } },
+        { "name": "Logout", "request": { "method": "POST", "url": "{{baseUrl}}/auth/logout" } },
+        { "name": "Verify Email", "request": { "method": "GET", "url": "{{baseUrl}}/auth/verify-email/:token" } },
+        { "name": "Forgot Password", "request": { "method": "POST", "url": "{{baseUrl}}/auth/forgot-password", "body": { "mode": "raw", "raw": "{\n  \"email\": \"\"\n}" } } },
+        { "name": "Reset Password", "request": { "method": "POST", "url": "{{baseUrl}}/auth/reset-password/:token", "body": { "mode": "raw", "raw": "{\n  \"password\": \"\"\n}" } } },
+        { "name": "Change Password", "request": { "method": "PATCH", "url": "{{baseUrl}}/auth/change-password" } }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        { "name": "Get My Profile", "request": { "method": "GET", "url": "{{baseUrl}}/users/me" } },
+        { "name": "Update My Profile", "request": { "method": "PATCH", "url": "{{baseUrl}}/users/me" } },
+        { "name": "Upload Profile Picture", "request": { "method": "POST", "url": "{{baseUrl}}/users/me/avatar" } },
+        { "name": "Wallet Summary", "request": { "method": "GET", "url": "{{baseUrl}}/users/me/wallet" } },
+        { "name": "Booking History", "request": { "method": "GET", "url": "{{baseUrl}}/users/me/bookings" } },
+        { "name": "Payment History", "request": { "method": "GET", "url": "{{baseUrl}}/users/me/payments" } }
+      ]
+    },
+    {
+      "name": "Listings (Owner + Customer)",
+      "item": [
+        { "name": "Create Listing (Owner)", "request": { "method": "POST", "url": "{{baseUrl}}/listings" } },
+        { "name": "Update Listing (Owner)", "request": { "method": "PATCH", "url": "{{baseUrl}}/listings/:id" } },
+        { "name": "Delete Listing (Owner)", "request": { "method": "DELETE", "url": "{{baseUrl}}/listings/:id" } },
+        { "name": "Pause/Resume Listing (Owner)", "request": { "method": "PATCH", "url": "{{baseUrl}}/listings/:id/pause" } },
+        { "name": "Browse/Search/Filter Listings", "request": { "method": "GET", "url": "{{baseUrl}}/listings?type=&location=&page=1&limit=20&sort=price" } },
+        { "name": "Get Listing By Id", "request": { "method": "GET", "url": "{{baseUrl}}/listings/:id" } },
+        { "name": "Nearby Listings", "request": { "method": "GET", "url": "{{baseUrl}}/listings/nearby?lat=&lng=" } },
+        { "name": "Favorite Listing", "request": { "method": "POST", "url": "{{baseUrl}}/listings/:id/favorite" } }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        { "name": "Create Booking", "request": { "method": "POST", "url": "{{baseUrl}}/bookings" } },
+        { "name": "Get My Bookings", "request": { "method": "GET", "url": "{{baseUrl}}/bookings" } },
+        { "name": "Get Booking By Id", "request": { "method": "GET", "url": "{{baseUrl}}/bookings/:id" } },
+        { "name": "Cancel Booking", "request": { "method": "PATCH", "url": "{{baseUrl}}/bookings/:id/cancel" } },
+        { "name": "Track Shipment", "request": { "method": "GET", "url": "{{baseUrl}}/bookings/:id/tracking" } }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        { "name": "Initialize Payment", "request": { "method": "POST", "url": "{{baseUrl}}/payments/initialize" } },
+        { "name": "Verify Payment", "request": { "method": "GET", "url": "{{baseUrl}}/payments/verify/:reference" } },
+        { "name": "Paystack Webhook", "request": { "method": "POST", "url": "{{baseUrl}}/payments/webhook" } },
+        { "name": "Payment History", "request": { "method": "GET", "url": "{{baseUrl}}/payments" } },
+        { "name": "Request Refund", "request": { "method": "POST", "url": "{{baseUrl}}/payments/:id/refund" } }
+      ]
+    },
+    {
+      "name": "Wallet & Withdrawals (Owner)",
+      "item": [
+        { "name": "Get Wallet", "request": { "method": "GET", "url": "{{baseUrl}}/wallet" } },
+        { "name": "Wallet Transaction History", "request": { "method": "GET", "url": "{{baseUrl}}/wallet/transactions" } },
+        { "name": "Add Bank Account", "request": { "method": "POST", "url": "{{baseUrl}}/bank-accounts" } },
+        { "name": "Validate Bank Account", "request": { "method": "POST", "url": "{{baseUrl}}/bank-accounts/validate" } },
+        { "name": "Request Withdrawal", "request": { "method": "POST", "url": "{{baseUrl}}/withdrawals" } },
+        { "name": "Withdrawal History", "request": { "method": "GET", "url": "{{baseUrl}}/withdrawals" } }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        { "name": "Create Review", "request": { "method": "POST", "url": "{{baseUrl}}/reviews" } },
+        { "name": "Update Review", "request": { "method": "PATCH", "url": "{{baseUrl}}/reviews/:id" } },
+        { "name": "Delete Review", "request": { "method": "DELETE", "url": "{{baseUrl}}/reviews/:id" } },
+        { "name": "Get Listing Reviews", "request": { "method": "GET", "url": "{{baseUrl}}/listings/:id/reviews" } }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        { "name": "Platform Analytics", "request": { "method": "GET", "url": "{{baseUrl}}/admin/analytics" } },
+        { "name": "List Users", "request": { "method": "GET", "url": "{{baseUrl}}/admin/users" } },
+        { "name": "Suspend User", "request": { "method": "PATCH", "url": "{{baseUrl}}/admin/users/:id/suspend" } },
+        { "name": "Activate User", "request": { "method": "PATCH", "url": "{{baseUrl}}/admin/users/:id/activate" } },
+        { "name": "Verify Owner", "request": { "method": "PATCH", "url": "{{baseUrl}}/admin/owners/:id/verify" } },
+        { "name": "Approve Withdrawal", "request": { "method": "PATCH", "url": "{{baseUrl}}/admin/withdrawals/:id/approve" } },
+        { "name": "Reject Withdrawal", "request": { "method": "PATCH", "url": "{{baseUrl}}/admin/withdrawals/:id/reject" } },
+        { "name": "All Payments", "request": { "method": "GET", "url": "{{baseUrl}}/admin/payments" } },
+        { "name": "Failed Payments", "request": { "method": "GET", "url": "{{baseUrl}}/admin/payments/failed" } },
+        { "name": "Audit Logs", "request": { "method": "GET", "url": "{{baseUrl}}/admin/audit-logs" } }
+      ]
+    }
+  ]
+}
