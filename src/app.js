@@ -8,6 +8,7 @@ const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const passport = require('./config/passport');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(compression());
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
+app.use(passport.initialize());
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -49,8 +51,9 @@ app.get('/health', (req, res) => {
   });
 });
 
-// TODO: mount feature routes here as they're built, e.g.:
-// app.use('/api/v1/auth', require('./routes/auth.routes'));
+app.use('/api/v1/auth', require('./routes/auth.routes'));
+
+// TODO: mount remaining feature routes here as they're built, e.g.:
 // app.use('/api/v1/users', require('./routes/user.routes'));
 // app.use('/api/v1/listings', require('./routes/listing.routes'));
 // app.use('/api/v1/bookings', require('./routes/booking.routes'));

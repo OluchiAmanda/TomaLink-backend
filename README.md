@@ -74,7 +74,8 @@ See `.env.example` for the full list. At minimum you'll need:
 | `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google OAuth credentials |
 | `PAYSTACK_SECRET_KEY` | Paystack server-side secret key |
 | `CLOUDINARY_URL` | Cloudinary connection string |
-| `EMAIL_HOST` / `EMAIL_USER` / `EMAIL_PASS` | SMTP config for verification/reset emails |
+| `EMAIL_HOST` / `EMAIL_USER` / `EMAIL_PASS` / `EMAIL_FROM` | SMTP config for verification/reset emails |
+| `APP_URL` | This API's own base URL — used to build the email verification link |
 
 ## API Documentation
 
