@@ -10,7 +10,7 @@ repository/codebase maintained independently.
 
 ## Tech Stack
 
-- **Runtime:** Node.js + Express.js (plain JavaScript, no TypeScript for now)
+- **Runtime:** Node.js + Express.js (plain JavaScript)
 - **Database:** MongoDB + Mongoose (current phase) → will migrate to PostgreSQL + TypeORM later
 - **Auth:** JWT (access + refresh tokens), Google OAuth, RBAC
 - **Payments:** Paystack (server-side verification + webhooks)
@@ -51,15 +51,6 @@ TomaLink-backend/
 └── README.md
 ```
 
-## Getting Started
-
-```bash
-git clone <repo-url>
-cd TomaLink-backend
-npm install
-cp .env.example .env   # fill in real values
-npm run dev
-```
 
 ## Environment Variables
 
@@ -87,14 +78,6 @@ Live API base URL: _link goes here once deployed_
 - Entity relationship diagram: [`docs/ERD.mermaid`](./docs/ERD.mermaid)
 - Full field-level schema reference: [`docs/ENTITY_SCHEMA.md`](./docs/ENTITY_SCHEMA.md)
 
-## Scripts
-
-| Command | Description |
-|---|---|
-| `npm run dev` | Start the server in watch mode |
-| `npm start` | Run the server in production mode |
-| `npm test` | Run unit + integration tests |
-| `npm run seed` | Seed MongoDB with sample data |
 
 ## Status
 

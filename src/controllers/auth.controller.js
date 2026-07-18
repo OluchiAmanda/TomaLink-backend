@@ -65,7 +65,7 @@ exports.forgotPassword = catchAsync(async (req, res) => {
   await authService.forgotPassword(req.body.email);
   res.status(200).json({
     success: true,
-    message: 'If that email is registered, a password reset link has been sent.',
+    message: 'A password reset link has been sent.',
   });
 });
 

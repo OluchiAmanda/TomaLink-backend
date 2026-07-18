@@ -1,12 +1,10 @@
 # Deploying TomaLink Backend to Render
 
-This can't be done from here — it needs your GitHub account (to push the repo) and
-your Render account (to connect it). Steps to do it yourself:
 
 ## 1. Push to GitHub
 ```bash
 cd TomaLink-backend
-git init                        # if not already done
+git init       
 git add .
 git commit -m "Initial commit: Phase 1 — foundation, scaffold, Auth model"
 git branch -M main
