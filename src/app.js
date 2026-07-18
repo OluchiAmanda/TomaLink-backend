@@ -54,6 +54,7 @@ app.get('/health', (req, res) => {
 app.use('/api/v1/auth', require('./routes/auth.routes'));
 app.use('/api/v1/users', require('./routes/user.routes'));
 app.use('/api/v1/listings', require('./routes/listing.routes'));
+app.use('/api/v1/recommendations', require('./routes/recommendation.routes'));
 
 // TODO: mount remaining feature routes here as they're built, e.g.:
 // app.use('/api/v1/bookings', require('./routes/booking.routes'));

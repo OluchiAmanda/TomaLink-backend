@@ -50,6 +50,13 @@ const listingSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    // Only meaningful for type: logistics/transport — used to estimate
+    // delivery time in the recommendation engine (distance / avgSpeedKmph).
+    // Falls back to a platform default if the owner hasn't set one.
+    avgSpeedKmph: {
+      type: Number,
+      min: 1,
+    },
     isAvailable: {
       type: Boolean,
       default: false, // stays false until the owner is admin-verified

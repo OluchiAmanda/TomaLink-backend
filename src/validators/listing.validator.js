@@ -17,6 +17,7 @@ exports.createListingSchema = Joi.object({
   dailyPrice: Joi.number().min(0).required(),
   capacity: Joi.number().min(0),
   vehicleType: Joi.string().max(100),
+  avgSpeedKmph: Joi.number().min(1).max(200),
 });
 
 exports.updateListingSchema = Joi.object({
@@ -28,4 +29,5 @@ exports.updateListingSchema = Joi.object({
   dailyPrice: Joi.number().min(0),
   capacity: Joi.number().min(0),
   vehicleType: Joi.string().max(100),
+  avgSpeedKmph: Joi.number().min(1).max(200),
 }).min(1);

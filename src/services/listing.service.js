@@ -37,6 +37,7 @@ exports.createListing = async (userId, data) => {
     dailyPrice: data.dailyPrice,
     capacity: data.capacity,
     vehicleType: data.vehicleType,
+    avgSpeedKmph: data.avgSpeedKmph,
     // Business rule: a listing can't go live until its owner is admin-verified,
     // regardless of what the owner requests here.
     isAvailable: ownerProfile.isVerifiedOwner,
