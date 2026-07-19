@@ -6,7 +6,7 @@ post-harvest losses through cold storage booking, refrigerated logistics schedul
 a verified-buyer marketplace, and real-time shipment tracking.
 
 This repository contains **only the backend**. The frontend is a separate
-repository/codebase maintained independently.
+repository maintained independently.
 
 ## Tech Stack
 
