@@ -16,16 +16,16 @@ exports.uploadAvatar = catchAsync(async (req, res) => {
   res.status(200).json({ success: true, message: 'Avatar updated.', data: { user } });
 });
 
-exports.createOwnerProfile = catchAsync(async (req, res) => {
-  const ownerProfile = await userService.createOwnerProfile(req.user._id, req.body);
+exports.createfarmerProfile = catchAsync(async (req, res) => {
+  const farmerProfile = await userService.createfarmerProfile(req.user._id, req.body);
   res.status(201).json({
     success: true,
-    message: 'Owner profile created. An admin must verify it before your listings can go live.',
-    data: { ownerProfile },
+    message: 'Farmer profile created. An admin must verify it before your listings can go live.',
+    data: { farmerProfile },
   });
 });
 
-exports.getMyOwnerProfile = catchAsync(async (req, res) => {
-  const ownerProfile = await userService.getMyOwnerProfile(req.user._id);
-  res.status(200).json({ success: true, data: { ownerProfile } });
+exports.getMyfarmerProfile = catchAsync(async (req, res) => {
+  const farmerProfile = await userService.getMyfarmerProfile(req.user._id);
+  res.status(200).json({ success: true, data: { farmerProfile } });
 });

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ownerProfileSchema = new mongoose.Schema(
+const farmerProfileSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -15,7 +15,6 @@ const ownerProfileSchema = new mongoose.Schema(
     },
     serviceType: {
       type: String,
-      enum: ['warehouse', 'cold_storage', 'logistics', 'transport'],
       required: true,
     },
     isVerifiedOwner: {
@@ -26,4 +25,4 @@ const ownerProfileSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('OwnerProfile', ownerProfileSchema);
+module.exports = mongoose.model('farmerProfile', farmerProfileSchema);

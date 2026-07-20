@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 
 const listingSchema = new mongoose.Schema(
   {
-    owner: {
+    farmer: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'OwnerProfile',
+      ref: 'farmerProfile',
       required: true,
     },
     type: {
       type: String,
-      enum: ['warehouse', 'cold_storage', 'logistics', 'transport'],
       required: true,
     },
     brandName: {

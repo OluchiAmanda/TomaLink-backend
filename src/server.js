@@ -24,7 +24,7 @@ const startServer = async (port = Number(PORT) || 5000, attempts = 0) => {
     }
     console.error('Server error:', err);
     process.exit(1);
-  });
+  }); // C:\Users\kene\Desktop\apps\TomaLink-backend\src\server.js
 
   return server;
 };
