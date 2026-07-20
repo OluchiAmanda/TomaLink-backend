@@ -14,10 +14,7 @@ const MAX_FAILED_ATTEMPTS = 5;
 const LOCK_TIME_MS = 15 * 60 * 1000; // 15 minutes
 const REFRESH_TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
-/**
- * Issues a fresh access + refresh token pair for a user and persists the
- * refresh token's hash so it can be validated, rotated, or revoked later.
- */
+
 const issueTokens = async (user, meta = {}) => {
   const accessToken = signAccessToken({ id: user._id, role: user.role });
   const refreshToken = signRefreshToken({ id: user._id });
@@ -48,7 +45,7 @@ exports.register = async ({ name, email, phone, password, role }) => {
     email,
     phone,
     passwordHash: password, // hashed automatically by the User model's pre-save hook
-    role: role || 'customer',
+    role: role || 'farmer',
     emailVerificationToken: hashedToken,
     emailVerificationExpires: Date.now() + 24 * 60 * 60 * 1000, // 24h
   });

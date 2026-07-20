@@ -19,7 +19,7 @@
     {
       "name": "Auth",
       "item": [
-        { "name": "Register", "request": { "method": "POST", "url": "{{baseUrl}}/auth/register", "body": { "mode": "raw", "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"role\": \"customer\"\n}" } } },
+        { "name": "Register", "request": { "method": "POST", "url": "{{baseUrl}}/auth/register", "body": { "mode": "raw", "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"role\": \"farmer\"\n}" } } },
         { "name": "Login", "request": { "method": "POST", "url": "{{baseUrl}}/auth/login", "body": { "mode": "raw", "raw": "{\n  \"email\": \"\",\n  \"password\": \"\"\n}" } } },
         { "name": "Google OAuth", "request": { "method": "GET", "url": "{{baseUrl}}/auth/google" } },
         { "name": "Refresh Token", "request": { "method": "POST", "url": "{{baseUrl}}/auth/refresh-token" } },
